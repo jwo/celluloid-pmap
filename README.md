@@ -29,6 +29,14 @@ I've used this implementation in several production systems over the last year. 
 
 Because I've been implementing the same initializer code in every project I've worked on for the last 6 months. It was time to take a stand, man.
 
+### What rubies will this run on?
+
+* 1.9.3
+* ruby-head (2.0)
+* jruby-19mode
+* jruby-head
+* rbx-19mode
+
 
 ## Installation
 
