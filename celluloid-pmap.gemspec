@@ -8,8 +8,8 @@ Gem::Specification.new do |gem|
   gem.version       = Celluloid::Pmap::VERSION
   gem.authors       = ["Jesse Wolgamott"]
   gem.email         = ["jesse@comalproductions.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.description   = %q{Easy Parallel Executing using Celluloid}
+  gem.summary       = %q{ Celluloid Futures are wicked sweet, and when combined with a #pmap implementation AND a supervisor to keep the max threads down, you can be wicked sweet too!}
   gem.homepage      = ""
   gem.license       = "MIT"
 
@@ -18,5 +18,8 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
 
+  gem.add_dependency('celluloid', '~> 0.12')
+
   gem.add_development_dependency "rake"
+  gem.add_development_dependency "rspec"
 end
