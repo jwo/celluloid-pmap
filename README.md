@@ -54,11 +54,16 @@ puts "You'll see the puts happen instantly, and the sleep in parallel"
 
 [55,65,75,85].pmap{|speed_limit| puts "I can't drive _#{speed_limit}_";
 sleep(rand)}
+```
 
-=> You'll see the puts happen instantly, and the sleep in parallel
-"I can't drive _55_ ""I can't drive _65_ "
-"I can't drive _75_ "
-"I can't drive _85_ "
+Or something more real-world?
+
+```
+User.active.all.pmap do |user| 
+  stripe_user = Stripe::Customer.retrieve user.stripe_customer_token
+  user.invoices = BuildsInvoicesFromStripeUser.build(stripe_user)
+  user.save
+end
 ```
 
 Problem: When using with ActiveRecord, you can quickly run out of connections. 
@@ -76,15 +81,21 @@ puts [1,2,3].pmap(2){|speed_limit| puts Time.now.tap { sleep(3) }}
 
 We default pmap's threads to the number of Celluloid cores in the system.
 
-## When will this help?
+### When should you use pmap over Sidekiq or Actors?
+
+When you need the response right away. (well, right away in the workflow sense). This is crazy good in IRB too. Destroying multiple records in parallel is nice.
+
+### When will this help performance?
 
 * When the blocks are IO bound (like database or web queries)
 * When you're running JRuby or Rubinius
 * When you're running C Extensions
 
-## So what will this not help with?
+### So what will this not speed things up?
 
-* Pure math or ruby computations
+* Pure math or ruby computations*
+
+\*except if you're on JRuby or Rubinius, where this will still speed those along quite nicely.
 
 ## Image Credit
 
