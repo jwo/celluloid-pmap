@@ -65,7 +65,7 @@ User.active.all.pmap do |user|
 end
 ```
 
-Problem: When using with ActiveRecord, you can quickly run out of connections. 
+Problem: When using with ActiveRecord, you can quickly run out of connections.  
 Answer: Specify the max number of threads (actors) to create at once!
 
 ```
