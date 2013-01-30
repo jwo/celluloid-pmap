@@ -52,8 +52,7 @@ Default usage will execute in parallel. Simply pass a block to an Enumerable
 ```
 puts "You'll see the puts happen instantly, and the sleep in parallel"
 
-[55,65,75,85].pmap{|speed_limit| puts "I can't drive _#{speed_limit}_";
-sleep(rand)}
+[55,65,75,85].pmap{|limit| puts "I can't drive #{limit}!"; sleep(rand)}
 ```
 
 Or something more real-world?
