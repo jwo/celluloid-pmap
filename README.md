@@ -78,6 +78,14 @@ We default pmap's threads to the number of Celluloid cores in the system.
 
 * Pure math or ruby computations
 
+## Image Credit
+
+Ben Scheirman (@subdigital) originally used the awesome Celluloid He-Man image
+in a presentation on background workers. "He-Man and the Masters of the
+Universe," AND "She-Ra: Princess of Power" are copyright Mattel.
+
+More information on He-Man can be found at the unspeakably wow site: http://castlegrayskull.org
+
 ## Contributing
 
 1. Fork it
