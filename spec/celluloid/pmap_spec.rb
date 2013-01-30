@@ -26,8 +26,17 @@ describe Celluloid::Pmap do
     }.to take_approximately(1).seconds
   end
 
-  it 'should default to 5 threads at once'
-  it 'can be set to many threads at once'
+  it 'should default to 5 threads at once' do
+    expect {
+      [1,2,3,4,5,6].pmap{|x| x; sleep(1) }
+    }.to take_approximately(2).seconds
+  end
+
+  it 'can be set to many threads at once' do
+    expect {
+      [1,2,3,4,5,6].pmap(10) {|x| x; sleep(1) }
+    }.to take_approximately(1).seconds
+  end
 
   it 'should be included in enumerable' do
     Enumerable.ancestors.should include(Celluloid::Pmap)

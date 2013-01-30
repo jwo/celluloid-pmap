@@ -30,6 +30,18 @@ puts "You should see two distinct groups of timestamps, 3 seconds apart"
 (1..20).pmap(10){|speed_limit| puts Time.now; sleep(3)}
 ```
 
+We default pmap's threads to the number of Celluloid cores in the system.
+
+## When will this help?
+
+* When the blocks are IO bound (like database or web queries)
+* When you're running JRuby or Rubinius
+* When you're running C Extensions
+
+## So what will this not help with?
+
+* Pure math or ruby computations
+
 ## Contributing
 
 1. Fork it
