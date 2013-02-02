@@ -1,6 +1,7 @@
 # Celluloid::Pmap
 
-[![Build Status](https://travis-ci.org/jwo/celluloid-pmap.png?branch=master)](https://travis-ci.org/jwo/celluloid-pmap) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/jwo/celluloid-pmap)
+[![Build Status](https://travis-ci.org/jwo/celluloid-pmap.png?branch=master)](https://travis-ci.org/jwo/celluloid-pmap)
+[![Code Climate](https://codeclimate.com/github/jwo/celluloid-pmap.png)](https://codeclimate.com/github/jwo/celluloid-pmap)
 
 Parallel Mapping using Celluloid
 
