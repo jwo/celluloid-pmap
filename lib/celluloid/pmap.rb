@@ -11,7 +11,9 @@ module Celluloid
         def pmap(size=Celluloid.cores, &block)
           pool = Pmap::ParallelMapWorker.pool(size: size)
           futures = map { |elem| pool.future :yielder, elem, &block }
-          futures.map { |future| future.value }.tap { pool.terminate }
+          futures.map { |future| future.value }
+        ensure
+          pool.terminate
         end
 
       end
