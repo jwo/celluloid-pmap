@@ -40,6 +40,13 @@ describe Celluloid::Pmap do
     }.to take_approximately(1).seconds
   end
 
+  let(:pool) { Celluloid::Pmap::ParallelMapWorker.pool(size: 10) }
+  it 'can reuse an existing thread pool' do
+    expect {
+      [1,2,3,4,5,6].pmap(pool) {|x| x; sleep(1) }
+    }.to take_approximately(1).seconds
+  end
+
   it 'should be included in enumerable' do
     Enumerable.ancestors.should include(Celluloid::Pmap)
   end
