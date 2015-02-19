@@ -105,6 +105,10 @@ Universe," AND "She-Ra: Princess of Power" are copyright Mattel.
 
 More information on He-Man can be found at the unspeakably wow site: http://castlegrayskull.org
 
+## Contributors
+
+* [Jason Voegele](https://github.com/jvoegele)
+
 ## Contributing
 
 1. Fork it
