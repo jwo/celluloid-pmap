@@ -18,6 +18,19 @@ The pmap will return an array of values when all of the Futures have completed a
 
 The pool can help to make sure you don't exceed your connection resources. A common use case for this is in Rails, you can easily exceed the default ActiveRecord connection size.
 
+### Use with ActiveRecord
+
+Some users have reported connection leaking with using ActiveRecord objects in a
+pmap. You can reuse a connection with this code below. You can read the backstory
+on the [decision to not include an AR dependency](https://github.com/jwo/celluloid-pmap/pull/2).
+
+```ruby
+users.pmap(4) do |user|
+  ActiveRecord::Base.connection_pool.with_connection { user.do_hefty_stuff! }
+end
+```
+
+
 ### Inspiration for this code
 
 Tony Arcieri created [celluloid](http://celluloid.io/), and the [simple_pmap example](https://github.com/celluloid/celluloid/blob/master/examples/simple_pmap.rb) from which this codebase started
