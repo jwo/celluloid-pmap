@@ -32,11 +32,11 @@ Because I've been implementing the same initializer code in every project I've w
 
 ### What rubies will this run on?
 
-* 1.9.3
-* ruby-head (2.0)
+* 2.0.0
+* 2.1.3
+* 2.2.0
 * jruby-19mode
 * jruby-head
-* rbx-19mode
 
 
 ## Installation
