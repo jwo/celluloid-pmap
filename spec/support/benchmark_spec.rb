@@ -1,14 +1,16 @@
 require 'benchmark'
 
-RSpec::Matchers.define :take_approximately do |n|
+RSpec::Matchers.define :take_approximately do |expected|
   chain :seconds do; end
 
   match do |block|
     @elapsed = Benchmark.realtime do
       block.call
     end
-    @elapsed.should be_within(0.2).of(n)
+    @elapsed.should be_within(0.2).of(expected)
   end
+
+  supports_block_expectations
 
   failure_message_for_should do |actual|
     "expected block to take about #{expected} seconds, but took #{@elapsed}"
@@ -19,7 +21,7 @@ RSpec::Matchers.define :take_approximately do |n|
   end
 
   description do
-    "take approximately #{expectely} seconds to execute"
+    "take approximately #{expected} seconds to execute"
   end
 
 end
