@@ -10,7 +10,7 @@ RSpec::Matchers.define :take_approximately do |expected|
     @elapsed.should be_within(0.2).of(expected)
   end
 
-  supports_block_expectations
+  supports_block_expectations if respond_to? :supports_block_expectations
 
   failure_message_for_should do |actual|
     "expected block to take about #{expected} seconds, but took #{@elapsed}"
