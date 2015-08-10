@@ -121,6 +121,7 @@ More information on He-Man can be found at the unspeakably wow site: http://cast
 ## Contributors
 
 * [Jason Voegele](https://github.com/jvoegele)
+* [rada bogdan raul](https://github.com/bogdanRada)
 
 ## Contributing
 
