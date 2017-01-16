@@ -1,0 +1,26 @@
+Style/Documentation:
+    Enabled: false
+
+# Don't enforce new style lambdas
+Style/Lambda:
+  Enabled: false
+
+Style/SpecialGlobalVars:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+
+Metrics/ClassLength:
+  Enabled: false
+
+Style/TernaryParentheses:
+  Enabled: false
+
+AllCops:
+  TargetRubyVersion: 2.2

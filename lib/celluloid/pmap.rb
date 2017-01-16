@@ -1,37 +1,34 @@
 require 'celluloid/pmap/parallel_map_worker'
-require "celluloid/pmap/version"
+require 'celluloid/pmap/version'
 
 module Celluloid
   module Pmap
+    celluloid_version = Gem.loaded_specs
+                        .values
+                        .detect { |repo| repo.name == 'celluloid' }
+                        .version.to_s.split('.')
 
-    def self.find_loaded_gem(name)
-      Gem.loaded_specs.values.detect{|repo| repo.name == name }
-    end
-
-    def self.pool_class
-      celluloid_version = find_loaded_gem("celluloid").version.to_s.split('.')
-      if celluloid_version[0].to_i == 0 && celluloid_version[1].to_i <= 16
-        require 'celluloid'
-        Celluloid::PoolManager
-      else
-        require 'celluloid/current'
-        Celluloid::Supervision::Container::Pool
-      end
+    if celluloid_version[0].to_i == 0 && celluloid_version[1].to_i <= 16
+      require 'celluloid'
+      POOL_CLASS = Celluloid::PoolManager
+    else
+      require 'celluloid/current'
+      POOL_CLASS = Celluloid::Supervision::Container::Pool
     end
 
     def self.included(base)
       base.class_eval do
-
-        def pmap(pool_or_size=Celluloid.cores, &block)
-          pool = if pool_or_size.class.ancestors.include?(Celluloid::Pmap.pool_class)
-            pool_or_size
-          else
-            Pmap::ParallelMapWorker.pool(size: pool_or_size)
-          end
+        def pmap(pool_or_size = Celluloid.cores, &block)
+          pool = begin
+             if pool_or_size.class.ancestors.include?(POOL_CLASS)
+               pool_or_size
+             else
+               Pmap::ParallelMapWorker.pool(size: pool_or_size)
+             end
+           end
           futures = map { |elem| pool.future(:yielder, elem, block) }
-          futures.map { |future| future.value }
+          futures.map(&:value)
         end
-
       end
     end
   end
