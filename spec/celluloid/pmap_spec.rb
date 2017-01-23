@@ -2,15 +2,15 @@ require 'spec_helper'
 
 describe Celluloid::Pmap do
   it 'should have a version number' do
-    Celluloid::Pmap::VERSION.should_not be_nil
+    expect(Celluloid::Pmap::VERSION).to_not be_nil
   end
 
   it 'should still map correctly' do
-    [4, 5, 6, 7].map { |x| x + 1 }.should eq([5, 6, 7, 8])
+    expect([4, 5, 6, 7].map { |x| x + 1 }).to eq([5, 6, 7, 8])
   end
 
   it 'should have same results when pmap' do
-    [4, 5, 6, 7].pmap { |x| x + 1 }.should eq([5, 6, 7, 8])
+    expect([4, 5, 6, 7].pmap { |x| x + 1 }).to eq([5, 6, 7, 8])
   end
 
   it 'should sleep in sequence for map' do
@@ -20,14 +20,14 @@ describe Celluloid::Pmap do
   end
 
   it 'should sleep in parallel for pmap' do
-    Celluloid.stub(:cores) { 4 }
+    allow(Celluloid).to receive(:cores) { 4 }
     expect do
       [1, 2, 3].pmap { sleep(1) }
     end.to take_approximately(1).seconds
   end
 
   it 'should default to the number of cores on the machine' do
-    Celluloid.stub(:cores) { 4 }
+    allow(Celluloid).to receive(:cores) { 4 }
     expect do
       [1, 2, 3, 4, 5, 6].pmap { sleep(1) }
     end.to take_approximately(2).seconds
@@ -47,6 +47,6 @@ describe Celluloid::Pmap do
   end
 
   it 'should be included in enumerable' do
-    Enumerable.ancestors.should include(Celluloid::Pmap)
+    expect(Enumerable.ancestors).to include(Celluloid::Pmap)
   end
 end
