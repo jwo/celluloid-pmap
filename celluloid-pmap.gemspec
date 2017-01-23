@@ -22,4 +22,6 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency "rake", "< 11.0"
   gem.add_development_dependency "rspec", "2.99"
+  gem.add_development_dependency "timers", "4.1.2"
+  gem.add_development_dependency "hitimes", "1.2.4"
 end
