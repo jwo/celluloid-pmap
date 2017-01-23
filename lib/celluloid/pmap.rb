@@ -32,7 +32,7 @@ module Celluloid
         ensure
           # We are responsible for terminating the actors that we spawned
           # see https://github.com/celluloid/celluloid/wiki/Actor-lifecycle
-          pool.terminate if default_pool
+          pool.terminate if default_pool && pool.alive?
         end
       end
     end
