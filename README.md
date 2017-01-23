@@ -15,6 +15,18 @@ sweet too!
 We use Celluloid Futures and Celluloid pool to execute blocks in parallel. 
 
 The pmap will return an array of values when all of the Futures have completed and return values (or return nil).
+A trivial example would be:
+
+```ruby
+require 'celluloid/pmap'
+
+concurrency = 4
+# process 4 URLs at once
+urls.pmap(concurrency) do |url|
+  process(url)
+end
+```
+
 
 The pool can help to make sure you don't exceed your connection resources. A common use case for this is in Rails, you can easily exceed the default ActiveRecord connection size.
 
