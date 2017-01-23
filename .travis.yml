@@ -2,7 +2,7 @@ script: bundle exec rake
 rvm:
   - 2.1
   - 2.2
-  - 2.3
+  - 2.3.3
   - jruby-19mode
   - jruby-head
 before_install:
