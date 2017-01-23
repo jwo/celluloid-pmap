@@ -23,11 +23,16 @@ module Celluloid
              if pool_or_size.class.ancestors.include?(POOL_CLASS)
                pool_or_size
              else
+               default_pool = true
                Pmap::ParallelMapWorker.pool(size: pool_or_size)
              end
            end
           futures = map { |elem| pool.future(:yielder, elem, block) }
           futures.map(&:value)
+        ensure
+          # We are responsible for terminating the actors that we spawned
+          # see https://github.com/celluloid/celluloid/wiki/Actor-lifecycle
+          pool.terminate if default_pool
         end
       end
     end
