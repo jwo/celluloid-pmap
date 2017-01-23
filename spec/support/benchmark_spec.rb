@@ -7,7 +7,7 @@ RSpec::Matchers.define :take_approximately do |expected|
     @elapsed = Benchmark.realtime do
       block.call
     end
-    @elapsed.should be_within(0.2).of(expected)
+    @elapsed.should be_within(0.5).of(expected)
   end
 
   supports_block_expectations if respond_to? :supports_block_expectations
