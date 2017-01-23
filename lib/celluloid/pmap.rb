@@ -30,6 +30,8 @@ module Celluloid
           end
           futures = map { |elem| pool.future(:yielder, elem, block) }
           futures.map { |future| future.value }
+        ensure
+          pool.terminate
         end
 
       end
