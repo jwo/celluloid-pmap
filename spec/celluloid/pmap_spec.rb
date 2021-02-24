@@ -21,14 +21,14 @@ describe Celluloid::Pmap do
   end
 
   it 'should sleep in parallel for pmap' do
-    Celluloid.stub(:cores) { 4 }
+    allow(Celluloid).to receive(:cores).and_return(4)
     expect {
       [1,2,3].pmap{|x| x; sleep(1) }
     }.to take_approximately(1).seconds
   end
 
   it 'should default to the number of cores on the machine' do
-    Celluloid.stub(:cores) { 4 }
+    allow(Celluloid).to receive(:cores).and_return(4)
     expect {
       [1,2,3,4,5,6].pmap{|x| x; sleep(1) }
     }.to take_approximately(2).seconds
