@@ -6,7 +6,6 @@ bundler_args: --no-deployment --binstubs=./bin
 
 before_install:
   - "echo 'gem: --no-ri --no-rdoc' > ~/.gemrc"
-  - printenv
   - if [[ ! "${RUBY_VERSION}" =~ "jruby" ]]; then travis_wait 30 rvm rubygems current; fi
   - if [[ ! "${RUBY_VERSION}" =~ "jruby" ]]; then yes | gem update --system --force || true; fi
   - gem --version
@@ -21,8 +20,6 @@ install:
   - bundle ${MY_BUNDLER_VERSION} config --local binstubs ./bin
   - bundle ${MY_BUNDLER_VERSION} config --local bin ./bin
   - bundle ${MY_BUNDLER_VERSION} install
-  - gem env
-  - bundle ${MY_BUNDLER_VERSION} env
 
 script:
   - echo $BUNDLE_GEMFILE
