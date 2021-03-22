@@ -43,20 +43,35 @@ I've used this implementation in several production systems over the last year. 
 
 Because I've been implementing the same initializer code in every project I've worked on for the last 6 months. It was time to take a stand, man.
 
+### What versions of Celluloid?
+
+- 0.16.0
+- 0.17.3
+- 0.17.4
+- 0.18.0
+
 ### What rubies will this run on?
 
-* 2.0.0
-* 2.1.3
-* 2.2.0
-* jruby-19mode
-* jruby-head
-
+- 2.1.3
+- 2.2.2
+- 2.3.1
+- 2.3.2
+- 2.3.3
+- 2.4.0
+- 2.5.3
+- 2.6.5
+- 2.7.1
+- 3.0.0
+- jruby-19mode
+- jruby-head
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'celluloid-pmap'
+```ruby
+    gem 'celluloid-pmap', '1.0'
+```
 
 ## Usage
 
