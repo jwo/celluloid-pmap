@@ -1,4 +1,4 @@
-require 'celluloid/pmap/parallel_map_worker'
+require 'spec_helper'
 
 describe Celluloid::Pmap::ParallelMapWorker do
 

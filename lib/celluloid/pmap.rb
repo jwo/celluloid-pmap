@@ -8,13 +8,26 @@ module Celluloid
       Gem.loaded_specs.values.detect{|repo| repo.name == name }
     end
 
+    def self.ensure_celluloid_running
+      celluloid_running = Celluloid.running? rescue false
+      Celluloid.boot unless celluloid_running
+    end
+
     def self.pool_class
       celluloid_version = find_loaded_gem("celluloid").version.to_s.split('.')
       if celluloid_version[0].to_i == 0 && celluloid_version[1].to_i <= 16
         require 'celluloid'
+        require 'celluloid/autostart'
+        ensure_celluloid_running
         Celluloid::PoolManager
-      else
+      elsif celluloid_version[0].to_i == 0 && celluloid_version[1].to_i < 18
         require 'celluloid/current'
+        ensure_celluloid_running
+        Celluloid::Supervision::Container::Pool
+      else
+        require 'celluloid'
+        require 'celluloid/pool'
+        ensure_celluloid_running
         Celluloid::Supervision::Container::Pool
       end
     end
